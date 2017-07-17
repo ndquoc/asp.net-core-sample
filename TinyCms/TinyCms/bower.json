@@ -1,0 +1,20 @@
+{
+  "name": "tinycms",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Quoc Ngo <quoc.ngo@orientsoftware.net>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/ndquoc/asp.net-core-sample",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "v3.3.7"
+  }
+}
