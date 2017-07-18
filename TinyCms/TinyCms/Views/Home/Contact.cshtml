@@ -1,0 +1,120 @@
+@model TinyCms.Models.ContactModel
+
+
+<form class="well form-horizontal" asp-controller="Home" asp-action="Contact" method="post">
+    <fieldset>
+
+        <!-- Form Name -->
+        <legend>Contact Us Today!</legend>
+
+        <!-- Text input-->
+
+        <!-- Success message -->
+        @if (ViewBag.IsSuccess == true)
+        {
+        <div class="alert alert-success" role="alert" id="success_message">Success <i class="glyphicon glyphicon-thumbs-up"></i> Thanks for contacting us, we will get back to you shortly.</div>
+        }
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FirstName, new { @class = "col-md-4 control-label" })
+            <div class="col-md-4 inputGroupContainer">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    @Html.EditorFor(m => m.FirstName, 
+                        new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(n => n.FirstName) } })
+                </div>
+            </div>
+            <div class="col-md-4">
+                @Html.ValidationMessageFor(m => m.FirstName)
+            </div>
+        </div>
+
+        <!-- Text input-->
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LastName, new { @class = "col-md-4 control-label" })
+            <div class="col-md-4 inputGroupContainer">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    @Html.EditorFor(m => m.LastName,
+                        new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(n => n.LastName) } })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <span asp-validation-for="@Model.LastName"></span>
+            </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" asp-for="Email"></label>
+            <div class="col-md-4 inputGroupContainer">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                    <input asp-for="Email" placeholder="E-Mail Address" class="form-control" type="email">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <span asp-validation-for="@Model.Email"></span>
+            </div>
+        </div>
+
+
+        <!-- Text input-->
+
+        <div class="form-group">
+            <label class="col-md-4 control-label" asp-for="@Model.Phone"></label>
+            <div class="col-md-4 inputGroupContainer">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+                    <input asp-for="@Model.Phone" class="form-control" type="text">
+                </div>
+            </div>
+        </div>
+
+        <!-- Text input-->
+
+        <div class="form-group">
+            <label class="col-md-4 control-label" asp-for="@Model.Address"></label>
+            <div class="col-md-4 inputGroupContainer">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                    <input asp-for="@Model.Address" placeholder="Address" class="form-control" type="text">
+                </div>
+            </div>
+        </div>
+
+        <!-- Text area -->
+
+        <div class="form-group">
+            <label class="col-md-4 control-label" asp-for="@Model.Message"></label>
+            <div class="col-md-4 inputGroupContainer">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                    <textarea class="form-control" asp-for="@Model.Message" placeholder="Message"></textarea>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <span asp-validation-for="@Model.Message"></span>
+            </div>
+        </div>
+
+        <!-- Button -->
+        <div class="form-group">
+            <label class="col-md-4 control-label"></label>
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-warning">Send <span class="glyphicon glyphicon-send"></span></button>
+            </div>
+        </div>
+
+    </fieldset>
+</form>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('.input-validation-error').parents('.form-group').addClass('has-error');
+            $('.field-validation-error').addClass('text-danger');
+        });
+    </script>
+}
