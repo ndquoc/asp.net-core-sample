@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TinyCms.Models;
+using TinyCms.DAL;
 
 namespace TinyCms.Controllers
 {
@@ -11,6 +12,12 @@ namespace TinyCms.Controllers
     [Route("Home")]
     public class HomeController : Controller
     {
+        ApplicationDataContext _dbContext;
+        public HomeController(ApplicationDataContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+
         [HttpGet("")]
         public IActionResult Index()
         {
@@ -34,10 +41,21 @@ namespace TinyCms.Controllers
 
         [HttpPost("Contact")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SubmitContact(ContactModel model)
+        public IActionResult SubmitContact(ContactModel model)
         {
             if(ModelState.IsValid)
             {
+                _dbContext.Contacts.Add(new DAL.Entities.Contact()
+                {
+                    Address = model.Address,
+                    Email = model.Email,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    Message = model.Message,
+                    Phone = model.Phone
+                });
+
+                _dbContext.SaveChanges();
                 ViewBag.IsSuccess = true;
                 return View("Contact", new ContactModel());
             }
