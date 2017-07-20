@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TinyCms.Models;
-using TinyCms.DAL;
+using TinyCms.DAL.Repositories;
 
 namespace TinyCms.Controllers
 {
@@ -12,10 +12,10 @@ namespace TinyCms.Controllers
     [Route("Home")]
     public class HomeController : Controller
     {
-        ApplicationDataContext _dbContext;
-        public HomeController(ApplicationDataContext dbContext)
+        IContactRepository _contactRepo;
+        public HomeController(IContactRepository contactRepo)
         {
-            _dbContext = dbContext;
+            _contactRepo = contactRepo;
         }
 
         [HttpGet("")]
@@ -45,7 +45,7 @@ namespace TinyCms.Controllers
         {
             if(ModelState.IsValid)
             {
-                _dbContext.Contacts.Add(new DAL.Entities.Contact()
+                _contactRepo.Add(new DAL.Entities.Contact()
                 {
                     Address = model.Address,
                     Email = model.Email,
@@ -55,7 +55,7 @@ namespace TinyCms.Controllers
                     Phone = model.Phone
                 });
 
-                _dbContext.SaveChanges();
+                _contactRepo.Save();
                 ViewBag.IsSuccess = true;
                 return View("Contact", new ContactModel());
             }

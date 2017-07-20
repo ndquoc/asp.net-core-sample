@@ -14,12 +14,17 @@ namespace TinyCms.DAL
         }
 
         public DbSet<Contact> Contacts { get; set; }
+        public DbSet<Job> Jobs { get; set; }
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
            base.OnModelCreating(modelBuilder);
         
             modelBuilder.Entity<Contact>()
+                .Property(b => b.Created)
+                .HasDefaultValueSql("getdate()");
+
+            modelBuilder.Entity<Job>()
                 .Property(b => b.Created)
                 .HasDefaultValueSql("getdate()");
         }

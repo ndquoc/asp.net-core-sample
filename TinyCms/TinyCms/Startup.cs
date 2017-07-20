@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration;
 using TinyCms.DAL;
 using Microsoft.EntityFrameworkCore;
+using TinyCms.DAL.Repositories;
 
 namespace TinyCms
 {
@@ -35,6 +36,9 @@ namespace TinyCms
             {
                 options.UseSqlServer(Configuration.GetConnectionString("sqlServerLocal"));
             });
+            
+            services.AddScoped<IContactRepository, ContactRepository>();
+
             // Add framework services.
             services.AddMvc();
         }
