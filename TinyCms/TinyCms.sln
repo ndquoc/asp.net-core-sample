@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TinyCms", "TinyCms\TinyCms.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TinyCms.Test", "TinyCms.Test\TinyCms.Test.csproj", "{1023B00B-10AB-47D7-8822-D145A807F2E6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TinyCms.Api", "TinyCms.Api\TinyCms.Api.csproj", "{ABC11193-CA75-42D1-B27E-2682F652196E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{1023B00B-10AB-47D7-8822-D145A807F2E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1023B00B-10AB-47D7-8822-D145A807F2E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1023B00B-10AB-47D7-8822-D145A807F2E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABC11193-CA75-42D1-B27E-2682F652196E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABC11193-CA75-42D1-B27E-2682F652196E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABC11193-CA75-42D1-B27E-2682F652196E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABC11193-CA75-42D1-B27E-2682F652196E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

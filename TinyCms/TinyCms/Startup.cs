@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using TinyCms.DAL;
 using Microsoft.EntityFrameworkCore;
 using TinyCms.DAL.Repositories;
+using System.Reflection;
 
 namespace TinyCms
 {
@@ -38,9 +39,12 @@ namespace TinyCms
             });
             
             services.AddScoped<IContactRepository, ContactRepository>();
-
+            
             // Add framework services.
-            services.AddMvc();
+            services.AddMvc()
+                .AddApplicationPart(typeof(TinyCms.Api.Controllers.HelloController).GetTypeInfo().Assembly)
+                .AddControllersAsServices();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
