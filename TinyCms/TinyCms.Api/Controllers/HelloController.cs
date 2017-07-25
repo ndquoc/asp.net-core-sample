@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using TinyCms.Api.Models;
+using System.Linq;
 
 namespace TinyCms.Api.Controllers
 {
@@ -18,6 +19,54 @@ namespace TinyCms.Api.Controllers
         public IEnumerable<HelloModel> Get()
         {
             return _listItems;
+        }
+
+        [HttpGet("{id}")]
+        public HelloModel Get(Guid id)
+        {
+            return _listItems.FirstOrDefault(p => p.Id == id);
+        }
+
+        // POST api/values
+        [HttpPost]
+        public IActionResult Post([FromBody]HelloModel value)
+        {
+            value.Id = Guid.NewGuid();
+            _listItems.Add(value);
+            return new ObjectResult(value);
+        }
+
+        // PUT api/values/5
+        [HttpPut("{id}")]
+        public IActionResult Put(Guid id, [FromBody]HelloModel value)
+        {
+            var item = _listItems.FirstOrDefault(p => p.Id == id);
+            if(item!=null)
+            {
+                item.Title = value.Title;
+
+                return new ObjectResult(item);
+            }
+            else
+            {
+                return StatusCode(404);
+            }
+        }
+
+        // DELETE api/values/5
+        [HttpDelete("{id}")]
+        public IActionResult Delete(Guid id)
+        {
+            var item = _listItems.FirstOrDefault(p => p.Id == id);
+            if (item != null)
+            {
+                _listItems.Remove(item);
+                return StatusCode(200);
+            }
+            else
+            {
+                return StatusCode(404);
+            }
         }
     }
 }

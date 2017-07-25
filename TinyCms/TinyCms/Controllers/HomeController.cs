@@ -10,6 +10,7 @@ namespace TinyCms.Controllers
 {
     [Route("")]
     [Route("Home")]
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class HomeController : Controller
     {
         IContactRepository _contactRepo;
