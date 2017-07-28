@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using TinyCms.DAL.Repositories;
 using System.Reflection;
 using Swashbuckle.AspNetCore.Swagger;
+using Newtonsoft.Json.Serialization;
 
 namespace TinyCms
 {
@@ -40,7 +41,16 @@ namespace TinyCms
             });
             
             services.AddScoped<IContactRepository, ContactRepository>();
-            
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials());
+            });
+
             // Add framework services.
             services.AddMvc()
                 .AddApplicationPart(typeof(TinyCms.Api.Controllers.HelloController).GetTypeInfo().Assembly)
@@ -73,6 +83,9 @@ namespace TinyCms
             }
 
             app.UseStaticFiles();
+
+            // global policy - assign here or on each controller
+            app.UseCors("CorsPolicy");
 
             app.UseMvc(routes =>
             {

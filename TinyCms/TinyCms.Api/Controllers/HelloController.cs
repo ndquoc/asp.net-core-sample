@@ -4,15 +4,17 @@ using System.Collections.Generic;
 using System.Text;
 using TinyCms.Api.Models;
 using System.Linq;
+using Microsoft.AspNetCore.Cors;
 
 namespace TinyCms.Api.Controllers
 {
     [Route("api/[controller]")]
-    public class HelloController: Controller
+    [EnableCors("CorsPolicy")]
+    public class HelloController : Controller
     {
         private static List<HelloModel> _listItems = new List<HelloModel>(new HelloModel[] {
-            new HelloModel(){ Title="Item 1", Id = Guid.NewGuid()},
-            new HelloModel() { Title = "Item 2", Id = Guid.NewGuid()}
+            new HelloModel(){ Title="Item 1", Id = Guid.NewGuid().ToString()},
+            new HelloModel() { Title = "Item 2", Id = Guid.NewGuid().ToString()}
         });
 
         [HttpGet]
@@ -22,7 +24,7 @@ namespace TinyCms.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public HelloModel Get(Guid id)
+        public HelloModel Get(string id)
         {
             return _listItems.FirstOrDefault(p => p.Id == id);
         }
@@ -31,17 +33,17 @@ namespace TinyCms.Api.Controllers
         [HttpPost]
         public IActionResult Post([FromBody]HelloModel value)
         {
-            value.Id = Guid.NewGuid();
+            value.Id = Guid.NewGuid().ToString();
             _listItems.Add(value);
             return new ObjectResult(value);
         }
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public IActionResult Put(Guid id, [FromBody]HelloModel value)
+        public IActionResult Put(string id, [FromBody]HelloModel value)
         {
             var item = _listItems.FirstOrDefault(p => p.Id == id);
-            if(item!=null)
+            if (item != null)
             {
                 item.Title = value.Title;
 
@@ -55,7 +57,7 @@ namespace TinyCms.Api.Controllers
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(Guid id)
+        public IActionResult Delete(string id)
         {
             var item = _listItems.FirstOrDefault(p => p.Id == id);
             if (item != null)

@@ -8,6 +8,6 @@ namespace TinyCms.Api.Models
     {
         public string Title { get; set; }
 
-        public Guid Id { get; set; }
+        public string Id { get; set; }
     }
 }
